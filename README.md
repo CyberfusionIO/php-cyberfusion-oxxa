@@ -1,4 +1,4 @@
-# Oxxa API client
+# oxxa
 
 PHP client for the [Oxxa API](https://www.oxxa.com/domeinnamen/api).
 
@@ -20,7 +20,7 @@ This client can be used in any PHP project and with any framework.
 Install the client with Composer:
 
 ```bash
-composer require cyberfusion/oxxa-api-client
+composer require cyberfusion/oxxa
 ```
 
 ## Usage
