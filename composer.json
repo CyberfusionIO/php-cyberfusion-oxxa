@@ -1,23 +1,14 @@
 {
-    "name": "cyberfusion/oxxa-api-client",
+    "name": "cyberfusion/oxxa",
     "description": "PHP client for Oxxa API",
-    "keywords": [
-        "cyberfusion",
-        "oxxa",
-        "api"
-    ],
-    "homepage": "https://github.com/CyberfusionIO/oxxa-api-client",
+    "type": "library",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "William Edwards",
-            "email": "support@cyberfusion.nl"
-        },
-        {
-            "name": "Dick van der Heiden",
-            "email": "dick@goedemiddag.nl"
-        }
-    ],
+    "support": {
+        "security": "https://cyberfusion.io/content/responsible-disclosure-policy",
+        "email": "support@cyberfusion.io"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=8.1",
         "ext-dom": "*",
@@ -34,6 +25,9 @@
         "phpstan/phpstan": "^1.2",
         "phpunit/phpunit": "^10.0"
     },
+    "config": {
+        "sort-packages": true
+    },
     "autoload": {
         "psr-4": {
             "Cyberfusion\\Oxxa\\": "src/"
@@ -46,24 +40,14 @@
     },
     "scripts": {
         "test": [
-            "@test:analyze",
-            "@test:no-coverage"
+            "@analyze",
+            "@test:no-coverage",
+            "@lint:check"
         ],
-        "test:analyze": "vendor/bin/phpstan analyze",
         "test:coverage": "vendor/bin/phpunit",
         "test:no-coverage": "vendor/bin/phpunit --no-coverage",
-        "pint:check": "vendor/bin/pint --test",
-        "pint:fix": "vendor/bin/pint",
-        "lint:check": [
-            "@pint:check"
-        ],
-        "lint:fix": [
-            "@pint:fix"
-        ]
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+        "analyze": "vendor/bin/phpstan analyse",
+        "lint:check": "vendor/bin/ecs",
+        "lint:fix": "vendor/bin/ecs --fix"
+    }
 }
