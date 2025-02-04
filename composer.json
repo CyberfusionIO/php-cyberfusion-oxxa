@@ -1,0 +1,53 @@
+{
+    "name": "cyberfusion/oxxa",
+    "description": "PHP client for Oxxa API",
+    "type": "library",
+    "license": "MIT",
+    "support": {
+        "security": "https://cyberfusion.io/content/responsible-disclosure-policy",
+        "email": "support@cyberfusion.io"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.1",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-simplexml": "*",
+        "guzzlehttp/guzzle": "^7.0",
+        "illuminate/http": "^9.0|^10.0|^11.0",
+        "illuminate/support": "^9.0|^10.0|^11.0",
+        "symfony/css-selector": "^6.0",
+        "symfony/dom-crawler": "^6.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.7",
+        "phpstan/phpstan": "^1.2",
+        "phpunit/phpunit": "^10.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Cyberfusion\\Oxxa\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cyberfusion\\Oxxa\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "@analyze",
+            "@test:no-coverage",
+            "@lint:check"
+        ],
+        "test:coverage": "vendor/bin/phpunit",
+        "test:no-coverage": "vendor/bin/phpunit --no-coverage",
+        "analyze": "vendor/bin/phpstan analyse",
+        "lint:check": "vendor/bin/ecs",
+        "lint:fix": "vendor/bin/ecs --fix"
+    }
+}

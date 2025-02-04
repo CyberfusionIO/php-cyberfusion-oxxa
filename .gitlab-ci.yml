@@ -1,0 +1,10 @@
+stages:
+  - preparation
+  - testing
+  - analysis
+
+include:
+  - project: 'shared/gitlab-ci-includes'
+    ref: main
+    file:
+      - '/php.yml'
