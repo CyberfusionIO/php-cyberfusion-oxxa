@@ -29,9 +29,9 @@ class Oxxa implements OxxaClient
 
     private const TIMEOUT = 180;
 
-    private const VERSION = '2.12.0';
+    private const VERSION = '2.13.0';
 
-    private const USER_AGENT = 'oxxa/'.self::VERSION;
+    private const USER_AGENT = 'oxxa/' . self::VERSION;
 
     private string $baseUri = 'https://api.oxxa.com/command.php';
 

@@ -24,7 +24,7 @@ class UserTldEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'user_tld_list'],
-                $request?->toArray() ?? []
+                $request?->toArray() ?? [],
             ));
 
         $statusCode = $this->getStatusCode($xml);

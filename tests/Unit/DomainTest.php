@@ -36,13 +36,13 @@ class DomainTest extends TestCase
         $this->oxxa = new Oxxa(
             username: 'USER',
             password: 'PASS',
-            client: $this->httpClient
+            client: $this->httpClient,
         );
     }
 
     public function test_it_provides_main_parameters(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainTakenResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainTakenResponse())->body()));
 
         $result = $this
             ->oxxa
@@ -61,7 +61,7 @@ class DomainTest extends TestCase
 
     public function test_it_provides_main_parameters_for_test(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainTakenResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainTakenResponse())->body()));
 
         $result = $this
             ->oxxa
@@ -85,7 +85,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_check_if_a_domain_is_available(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainTakenResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainTakenResponse())->body()));
 
         $sld = 'example';
         $tld = 'org';
@@ -109,7 +109,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_register_given_domain(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainRegisterResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainRegisterResponse())->body()));
 
         $domain = new Domain();
         $domain->sld = 'example';
@@ -148,7 +148,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_transfer_given_domain(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainTransferResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainTransferResponse())->body()));
 
         $domain = new Domain();
         $domain->sld = 'example';
@@ -187,7 +187,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_put_domain_in_quarantine(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainDeletedResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainDeletedResponse())->body()));
 
         $isQuarantined = $this
             ->oxxa
@@ -208,7 +208,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_send_epp(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainEppSentResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainEppSentResponse())->body()));
 
         $tokenSent = $this
             ->oxxa
@@ -229,7 +229,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_retrieve_domain_information(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainInformationResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainInformationResponse())->body()));
 
         $domainInf = $this
             ->oxxa
@@ -252,7 +252,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_enable_auto_renew_for_domain(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainAutoRenewResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainAutoRenewResponse())->body()));
 
         $isSet = $this
             ->oxxa
@@ -274,7 +274,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_disable_auto_renew_for_domain(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainAutoRenewResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainAutoRenewResponse())->body()));
 
         $isSet = $this
             ->oxxa
@@ -296,7 +296,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_lock_domain(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainLockResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainLockResponse())->body()));
 
         $isSet = $this
             ->oxxa
@@ -318,7 +318,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_unlock_domain(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainLockResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainLockResponse())->body()));
 
         $isSet = $this
             ->oxxa
@@ -340,7 +340,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_update_domain_name_servers(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainNameServerResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainNameServerResponse())->body()));
 
         $domain = new Domain();
         $domain->sld = 'example';
@@ -367,7 +367,7 @@ class DomainTest extends TestCase
 
     public function test_it_can_retrieve_domain_list(): void
     {
-        $this->httpClient->fake(fn (Request $request) => Factory::response((new DomainListResponse())->body()));
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainListResponse())->body()));
 
         $request = new DomainListRequest();
         $request->tld = 'org';

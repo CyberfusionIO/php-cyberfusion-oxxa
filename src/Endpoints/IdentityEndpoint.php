@@ -25,7 +25,7 @@ class IdentityEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'identity_list'],
-                $request?->toArray() ?? []
+                $request?->toArray() ?? [],
             ));
 
         $statusCode = $this->getStatusCode($xml);
@@ -164,8 +164,8 @@ class IdentityEndpoint extends Endpoint implements EndpointContract
                 success: false,
                 message: sprintf(
                     'The identity is missing the required fields: `%s`',
-                    implode(', ', $identity->missingFields($requiredFields))
-                )
+                    implode(', ', $identity->missingFields($requiredFields)),
+                ),
             );
         }
 
@@ -173,7 +173,7 @@ class IdentityEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'identity_add'],
-                $identity->toArray()
+                $identity->toArray(),
             ));
 
         $statusCode = $this->getStatusCode($xml);
@@ -210,7 +210,7 @@ class IdentityEndpoint extends Endpoint implements EndpointContract
                     'command' => 'identity_upd',
                     'identity' => $handle,
                 ],
-                $identity->toArray()
+                $identity->toArray(),
             ));
 
         $statusCode = $this->getStatusCode($xml);

@@ -53,7 +53,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'domain_list'],
-                $request?->toArray() ?? []
+                $request?->toArray() ?? [],
             ));
 
         $statusCode = $this->getStatusCode($xml);
@@ -173,8 +173,8 @@ class DomainEndpoint extends Endpoint implements EndpointContract
                 success: false,
                 message: sprintf(
                     'The domain is missing the required fields: `%s`',
-                    implode(', ', $domain->missingFields($requiredFields))
-                )
+                    implode(', ', $domain->missingFields($requiredFields)),
+                ),
             );
         }
 
@@ -182,7 +182,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'register'],
-                $domain->toArray()
+                $domain->toArray(),
             ));
 
         $statusCode = $this->getStatusCode($xml);
@@ -195,7 +195,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
                     StatusCode::STATUS_DOMAIN_REGISTERED,
                     StatusCode::STATUS_DOMAIN_REGISTER_REQUESTED,
                 ],
-                true
+                true,
             ),
             message: $statusDescription,
             status: $statusCode,
@@ -212,7 +212,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         if (empty($domain->tld) || empty($domain->sld)) {
             return new OxxaResult(
                 success: false,
-                message: 'The TLD and SLD must be provided'
+                message: 'The TLD and SLD must be provided',
             );
         }
 
@@ -280,7 +280,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         if (empty($domain->tld) || empty($domain->sld)) {
             return new OxxaResult(
                 success: false,
-                message: 'The TLD and SLD must be provided'
+                message: 'The TLD and SLD must be provided',
             );
         }
 
@@ -288,7 +288,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'domain_upd'],
-                $domain->toArray()
+                $domain->toArray(),
             ));
 
         $statusCode = $this->getStatusCode($xml);
@@ -337,7 +337,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         return $this->updateAutoRenewal(
             sld: $sld,
             tld: $tld,
-            autoRenew: true
+            autoRenew: true,
         );
     }
 
@@ -351,7 +351,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         return $this->updateAutoRenewal(
             sld: $sld,
             tld: $tld,
-            autoRenew: false
+            autoRenew: false,
         );
     }
 
@@ -391,7 +391,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         return $this->updateLock(
             sld: $sld,
             tld: $tld,
-            lock: true
+            lock: true,
         );
     }
 
@@ -405,7 +405,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         return $this->updateLock(
             sld: $sld,
             tld: $tld,
-            lock: false
+            lock: false,
         );
     }
 
@@ -419,7 +419,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         if (is_null($domain->tld) || is_null($domain->sld)) {
             return new OxxaResult(
                 success: false,
-                message: 'The TLD and SLD must be provided'
+                message: 'The TLD and SLD must be provided',
             );
         }
 
@@ -463,7 +463,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'transfer'],
-                $domain->toArray()
+                $domain->toArray(),
             ));
 
         $statusCode = $this->getStatusCode($xml);
@@ -478,7 +478,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
                     StatusCode::STATUS_DOMAIN_TRANSFERRED,
                     StatusCode::STATUS_DOMAIN_TRANSFERRED_ALTERNATIVE,
                 ],
-                true
+                true,
             ),
             message: $statusDescription,
             status: $statusCode,
@@ -495,7 +495,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         if (empty($domain->tld) || empty($domain->sld)) {
             return new OxxaResult(
                 success: false,
-                message: 'The TLD and SLD must be provided'
+                message: 'The TLD and SLD must be provided',
             );
         }
 

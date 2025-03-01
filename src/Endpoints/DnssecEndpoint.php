@@ -32,8 +32,8 @@ class DnssecEndpoint extends Endpoint implements EndpointContract
                 success: false,
                 message: sprintf(
                     'The model is missing the required fields: `%s`',
-                    implode(', ', $dnssec->missingFields($requiredFields))
-                )
+                    implode(', ', $dnssec->missingFields($requiredFields)),
+                ),
             );
         }
 
@@ -41,7 +41,7 @@ class DnssecEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'dnssec_add'],
-                $dnssec->toArray()
+                $dnssec->toArray(),
             ));
 
         $statusCode = $this->getStatusCode($xml);
@@ -74,7 +74,7 @@ class DnssecEndpoint extends Endpoint implements EndpointContract
         if ($statusCode !== StatusCode::STATUS_DNSSEC_RETRIEVED) {
             return new OxxaResult(
                 success: false,
-                message: $statusDescription
+                message: $statusDescription,
             );
         }
 
@@ -123,8 +123,8 @@ class DnssecEndpoint extends Endpoint implements EndpointContract
                 success: false,
                 message: sprintf(
                     'The model is missing the required fields: `%s`',
-                    implode(', ', $dnssec->missingFields($requiredFields))
-                )
+                    implode(', ', $dnssec->missingFields($requiredFields)),
+                ),
             );
         }
 
@@ -132,7 +132,7 @@ class DnssecEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'dnssec_del'],
-                $dnssec->toArray()
+                $dnssec->toArray(),
             ));
 
         $statusCode = $this->getStatusCode($xml);
