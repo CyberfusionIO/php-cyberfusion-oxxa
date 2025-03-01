@@ -6,12 +6,34 @@ use Cyberfusion\Oxxa\Contracts\Endpoint as EndpointContract;
 use Cyberfusion\Oxxa\DataTransferObjects\Price;
 use Cyberfusion\Oxxa\Enum\StatusCode;
 use Cyberfusion\Oxxa\Enum\Toggle;
+use Cyberfusion\Oxxa\Exceptions\DomainNotInAdministrationException;
+use Cyberfusion\Oxxa\Exceptions\DomainNotMutatableException;
+use Cyberfusion\Oxxa\Exceptions\InsufficientFundsException;
+use Cyberfusion\Oxxa\Exceptions\InvalidAdminIdentityException;
+use Cyberfusion\Oxxa\Exceptions\InvalidBillingIdentityException;
+use Cyberfusion\Oxxa\Exceptions\InvalidCredentialsException;
+use Cyberfusion\Oxxa\Exceptions\InvalidNameserverGroupException;
+use Cyberfusion\Oxxa\Exceptions\InvalidRegistrantIdentityException;
+use Cyberfusion\Oxxa\Exceptions\InvalidTechIdentityException;
+use Cyberfusion\Oxxa\Exceptions\UnableToPerformRequestException;
 use Cyberfusion\Oxxa\Models\SslProduct;
 use Cyberfusion\Oxxa\Support\OxxaResult;
 use Symfony\Component\DomCrawler\Crawler;
 
 class ProductEndpoint extends Endpoint implements EndpointContract
 {
+    /**
+     * @throws DomainNotInAdministrationException
+     * @throws InvalidRegistrantIdentityException
+     * @throws InsufficientFundsException
+     * @throws DomainNotMutatableException
+     * @throws InvalidTechIdentityException
+     * @throws InvalidBillingIdentityException
+     * @throws InvalidNameserverGroupException
+     * @throws InvalidAdminIdentityException
+     * @throws UnableToPerformRequestException
+     * @throws InvalidCredentialsException
+     */
     public function sslProducts(array $additionalParameters = []): OxxaResult
     {
         $xml = $this

@@ -132,13 +132,13 @@ class DomainEndpoint extends Endpoint implements EndpointContract
             nameserverGroup: $detailsNode->filter('nsgroup')->text(),
             autoRenew: Toggle::toBoolean($detailsNode->filter('autorenew')->text()),
             expireDate: DateTime::createFromFormat('d-m-Y', $detailsNode->filter('expire_date')->text())->setTime(0, 0),
+            lock: $detailsNode->filter('lock')->count()
+                ? Toggle::toBoolean($detailsNode->filter('lock')->text())
+                : null,
             useTrustee: $detailsNode->filter('usetrustee')->count()
                 ? Toggle::toBoolean($detailsNode->filter('usetrustee')->text())
                 : null,
             dnsSec: Toggle::toBoolean($detailsNode->filter('dnssec')->text()),
-            lock: $detailsNode->filter('lock')->count()
-                ? Toggle::toBoolean($detailsNode->filter('lock')->text())
-                : null,
         );
 
         return new OxxaResult(
@@ -159,7 +159,6 @@ class DomainEndpoint extends Endpoint implements EndpointContract
     public function register(Domain $domain): OxxaResult
     {
         $requiredFields = [
-            'identity-admin',
             'identity-registrant',
             'nsgroup',
             'sld',
@@ -302,7 +301,7 @@ class DomainEndpoint extends Endpoint implements EndpointContract
     }
 
     /**
-     * Update the auto renewal for the domain.
+     * Update the auto-renewal for the domain.
      *
      * @throws OxxaException
      */
@@ -351,7 +350,6 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         return $this->updateAutoRenewal(
             sld: $sld,
             tld: $tld,
-            autoRenew: false,
         );
     }
 
@@ -405,7 +403,6 @@ class DomainEndpoint extends Endpoint implements EndpointContract
         return $this->updateLock(
             sld: $sld,
             tld: $tld,
-            lock: false,
         );
     }
 
@@ -516,10 +513,11 @@ class DomainEndpoint extends Endpoint implements EndpointContract
             data: [
                 'done' => $xml->filter('channel > order > done')->text() === 'TRUE',
                 'description' => $statusDescription,
-                'finished' => in_array($statusCode, [
-                    StatusCode::STATUS_DOMAIN_TRANSFERRED,
-                    StatusCode::STATUS_DOMAIN_TRANSFERRED_ALTERNATIVE,
-                ]),
+                'finished' => in_array(
+                    needle: $statusCode,
+                    haystack: [StatusCode::STATUS_DOMAIN_TRANSFERRED, StatusCode::STATUS_DOMAIN_TRANSFERRED_ALTERNATIVE],
+                    strict: true,
+                ),
             ],
             status: $statusCode,
         );
