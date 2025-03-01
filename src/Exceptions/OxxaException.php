@@ -36,7 +36,7 @@ abstract class OxxaException extends Exception
         int $code,
         public readonly ?string $statusCode = null,
         public readonly ?string $statusMessage = null,
-        ?Throwable $previous = null
+        ?Throwable $previous = null,
     ) {
         parent::__construct($message, $code, $previous);
     }

@@ -11,7 +11,7 @@ class MissingUsernameException extends OxxaException
         parent::__construct(
             message: 'Missing the username in the client',
             code: self::MISSING_USERNAME,
-            previous: $previous
+            previous: $previous,
         );
     }
 }

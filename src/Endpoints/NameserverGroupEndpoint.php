@@ -23,7 +23,7 @@ class NameserverGroupEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'nsgroup_list'],
-                $request?->toArray() ?? []
+                $request?->toArray() ?? [],
             ));
 
         $statusCode = $this->getStatusCode($xml);
@@ -142,8 +142,8 @@ class NameserverGroupEndpoint extends Endpoint implements EndpointContract
                 success: false,
                 message: sprintf(
                     'The nameserver group is missing the required fields: `%s`',
-                    implode(', ', $nameserverGroup->missingFields($requiredFields))
-                )
+                    implode(', ', $nameserverGroup->missingFields($requiredFields)),
+                ),
             );
         }
 
@@ -151,7 +151,7 @@ class NameserverGroupEndpoint extends Endpoint implements EndpointContract
             ->client
             ->request(array_merge(
                 ['command' => 'nsgroup_add'],
-                $nameserverGroup->toArray()
+                $nameserverGroup->toArray(),
             ));
 
         $statusCode = $this->getStatusCode($xml);
@@ -188,7 +188,7 @@ class NameserverGroupEndpoint extends Endpoint implements EndpointContract
                     'command' => 'nsgroup_upd',
                     'nsgroup' => $handle,
                 ],
-                $nameserverGroup->toArray()
+                $nameserverGroup->toArray(),
             ));
 
         $statusCode = $this->getStatusCode($xml);
