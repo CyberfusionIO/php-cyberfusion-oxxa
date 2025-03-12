@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Please note this changelog affects 
 this package and not the Oxxa API.
 
+## [2.13.1]
+
+### Fixed
+
+- Remove `admin-identity` as required field.
+
 ## [2.13.0]
 
 ### Added

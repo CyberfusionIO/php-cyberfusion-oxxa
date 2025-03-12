@@ -58,7 +58,7 @@ class Identity implements Model
             // Add the required company field
             $fields[] = 'jobtitle';
         } elseif (in_array('jobtitle', $fields, true)) {
-            // Remove the require company fields
+            // Remove the required company fields
             unset($fields['jobtitle']);
         }
 
