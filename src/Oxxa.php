@@ -60,7 +60,7 @@ class Oxxa implements OxxaClient
         return $this;
     }
 
-    public function enabledTestMode(): self
+    public function enableTestMode(): self
     {
         $this->testMode = true;
 
