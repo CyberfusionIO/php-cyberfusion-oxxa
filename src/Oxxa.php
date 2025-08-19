@@ -63,8 +63,6 @@ class Oxxa implements OxxaClient
     /**
      * Set the test mode to enabled.
      *
-     * @return $this
-     *
      * @deprecated Use enableTestMode() instead.
      */
     public function enabledTestMode(): self
