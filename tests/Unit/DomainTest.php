@@ -10,6 +10,7 @@ use Cyberfusion\Oxxa\Requests\DomainListRequest;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainAutoRenewResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainDeletedResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainEppSentResponse;
+use Cyberfusion\Oxxa\Tests\Fakes\DomainEppShowResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainInformationResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainListResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainLockResponse;

@@ -2,7 +2,7 @@
 
 namespace Cyberfusion\Oxxa\Tests\Fakes;
 
-class DomainEppSentResponse
+class DomainEppShowResponse
 {
     public function body(): string
     {
