@@ -66,7 +66,7 @@ class DomainTest extends TestCase
 
         $result = $this
             ->oxxa
-            ->enabledTestMode()
+            ->enableTestMode()
             ->domain()
             ->check('example', 'org');
 

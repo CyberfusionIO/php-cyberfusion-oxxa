@@ -29,7 +29,7 @@ class Oxxa implements OxxaClient
 
     private const TIMEOUT = 180;
 
-    private const VERSION = '2.13.1';
+    private const VERSION = '2.13.2';
 
     private const USER_AGENT = 'oxxa/' . self::VERSION;
 
@@ -60,7 +60,17 @@ class Oxxa implements OxxaClient
         return $this;
     }
 
+    /**
+     * Set the test mode to enabled.
+     *
+     * @deprecated Use enableTestMode() instead.
+     */
     public function enabledTestMode(): self
+    {
+        return $this->enableTestMode();
+    }
+
+    public function enableTestMode(): self
     {
         $this->testMode = true;
 
