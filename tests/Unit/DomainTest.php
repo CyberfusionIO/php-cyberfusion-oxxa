@@ -10,6 +10,7 @@ use Cyberfusion\Oxxa\Requests\DomainListRequest;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainAutoRenewResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainDeletedResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainEppSentResponse;
+use Cyberfusion\Oxxa\Tests\Fakes\DomainEppShowResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainInformationResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainListResponse;
 use Cyberfusion\Oxxa\Tests\Fakes\DomainLockResponse;
@@ -219,6 +220,27 @@ class DomainTest extends TestCase
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'domain_epp' &&
+                Arr::get($request->data(), 'sld') === 'example' &&
+                Arr::get($request->data(), 'tld') === 'org' &&
+                Arr::get($request->data(), 'apiuser') === 'USER' &&
+                Arr::get($request->data(), 'apipassword') === 'PASS' &&
+                Arr::get($request->data(), 'test') === null;
+        });
+    }
+
+    public function test_it_can_show_epp(): void
+    {
+        $this->httpClient->fake(fn(Request $request) => Factory::response((new DomainEppShowResponse())->body()));
+
+        $tokenSent = $this
+            ->oxxa
+            ->domain()
+            ->showEpp('example', 'org');
+
+        $this->assertTrue($tokenSent->success());
+        $this->httpClient->assertSent(function (Request $request) {
+            return $request->method() === 'GET' &&
+                Arr::get($request->data(), 'command') === 'domain_epp_show' &&
                 Arr::get($request->data(), 'sld') === 'example' &&
                 Arr::get($request->data(), 'tld') === 'org' &&
                 Arr::get($request->data(), 'apiuser') === 'USER' &&

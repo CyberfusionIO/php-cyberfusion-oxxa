@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Please note this changelog affects 
 this package and not the Oxxa API.
 
-## [2.13.2]
+## [2.14]
+
+### Added
+
+- Add `domain_epp_show` command to the `Domain` endpoint to retrieve the EPP code for a domain.
 
 ### Fixed
 

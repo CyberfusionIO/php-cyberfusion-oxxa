@@ -10,6 +10,8 @@ class StatusCode
 
     public const STATUS_DOMAIN_LOCK_CHANGED = 'XMLOK 3';
 
+    public const STATUS_DOMAIN_TOKEN_RETRIEVED = 'XMLOK 136';
+
     public const STATUS_DOMAIN_TOKEN_SENT = 'XMLOK 39';
 
     public const STATUS_DOMAIN_UPDATED = 'XMLOK 12';

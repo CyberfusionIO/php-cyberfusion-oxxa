@@ -269,6 +269,36 @@ class DomainEndpoint extends Endpoint implements EndpointContract
     }
 
     /**
+     * Show the EPP token. (The TLD must support this.)
+     *
+     * @throws OxxaException
+     */
+    public function showEpp(string $sld, string $tld): OxxaResult
+    {
+        $xml = $this
+            ->client
+            ->request([
+                'command' => 'domain_epp_show',
+                'sld' => $sld,
+                'tld' => $tld,
+            ]);
+
+        $statusCode = $this->getStatusCode($xml);
+        $statusDescription = $this->getStatusDescription($xml);
+
+        return new OxxaResult(
+            success: $statusCode === StatusCode::STATUS_DOMAIN_TOKEN_RETRIEVED,
+            message: $statusDescription,
+            data: [
+                'epp' => $xml->filter('channel > order > details')->count()
+                    ? $xml->filter('channel > order > details')->text()
+                    : null,
+            ],
+            status: $statusCode,
+        );
+    }
+
+    /**
      * Update the domain. Be aware, when changing the identity-registrant some TLD's handle this as a transfer to a new
      * account. The TLD might charge you for that.
      *
