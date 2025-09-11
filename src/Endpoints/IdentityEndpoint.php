@@ -47,8 +47,6 @@ class IdentityEndpoint extends Endpoint implements EndpointContract
                     alias: $identityNode->filter('alias')->text(),
                     companyName: $identityNode->filter('company_name')->text(),
                     name: $identityNode->filter('name')->text(),
-                );
-            });
 
         return new OxxaResult(
             success: true,
@@ -121,8 +119,6 @@ class IdentityEndpoint extends Endpoint implements EndpointContract
                 ? DateTime::createFromFormat('d-m-Y', $detailsNode->filter('idcarddate')->text())->setTime(0, 0)
                 : null,
             idCardIssuer: $detailsNode->filter('idcardissuer')->text(),
-            xxxMemberId: $detailsNode->filter('xxxmemberid')->text(),
-            xxxPassword: $detailsNode->filter('xxxpassword')->text(),
             ensId: $detailsNode->filter('ens_id')->text(),
             ensPassword: $detailsNode->filter('ens_password')->text(),
             profession: $detailsNode->filter('profession')->text(),

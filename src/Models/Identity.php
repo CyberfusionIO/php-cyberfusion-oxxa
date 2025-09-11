@@ -43,10 +43,7 @@ class Identity implements Model
         public ?string $trademarkName = null,
         public ?DateTimeInterface $idCardDate = null,
         public ?string $idCardIssuer = null,
-        public ?string $xxxMemberId = null,
-        public ?string $xxxPassword = null,
         public ?string $ensId = null,
-        public ?string $ensPassword = null,
         public ?string $profession = null,
         public ?string $travelUinId = null,
     ) {
@@ -102,8 +99,6 @@ class Identity implements Model
                 ->idCardDate
                 ?->format('d-m-Y'),
             'idcardissuer' => $this->idCardIssuer,
-            'xxxmemberid' => $this->xxxMemberId,
-            'xxxpassword' => $this->xxxPassword,
             'ens_id' => $this->ensId,
             'ens_password' => $this->ensPassword,
             'profession' => $this->profession,
