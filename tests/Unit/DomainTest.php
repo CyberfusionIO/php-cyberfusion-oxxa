@@ -50,7 +50,7 @@ class DomainTest extends TestCase
             ->domain()
             ->check('example', 'org');
 
-        $this->assertTrue($result->success());
+        $this->assertTrue($result->success(), $result->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'domain_check' &&
@@ -70,7 +70,7 @@ class DomainTest extends TestCase
             ->domain()
             ->check('example', 'org');
 
-        $this->assertTrue($result->success());
+        $this->assertTrue($result->success(), $result->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'domain_check' &&
@@ -95,7 +95,7 @@ class DomainTest extends TestCase
             ->domain()
             ->check($sld, $tld);
 
-        $this->assertTrue($available->success());
+        $this->assertTrue($available->success(), $available->getMessage());
         $this->assertFalse($available->getData('available'));
         $this->httpClient->assertSent(function (Request $request) use ($sld, $tld) {
             return $request->method() === 'GET' &&
@@ -121,13 +121,14 @@ class DomainTest extends TestCase
         $domain->dnsTemplate = 'ABCD123456';
         $domain->lock = true;
         $domain->executionAt = Carbon::createFromDate('2020', '01', '01');
+        $domain->autoRenew = false;
 
         $registered = $this
             ->oxxa
             ->domain()
             ->register($domain);
 
-        $this->assertTrue($registered->success());
+        $this->assertTrue($registered->success(), $registered->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'register' &&
@@ -160,13 +161,14 @@ class DomainTest extends TestCase
         $domain->dnsTemplate = 'ABCD123456';
         $domain->lock = true;
         $domain->executionAt = Carbon::createFromDate('2020', '01', '01');
+        $domain->autoRenew = false;
 
         $transferred = $this
             ->oxxa
             ->domain()
             ->transfer($domain);
 
-        $this->assertTrue($transferred->success());
+        $this->assertTrue($transferred->success(), $transferred->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'transfer' &&
@@ -195,7 +197,7 @@ class DomainTest extends TestCase
             ->domain()
             ->toQuarantine('example', 'org');
 
-        $this->assertTrue($isQuarantined->success());
+        $this->assertTrue($isQuarantined->success(), $isQuarantined->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'domain_del' &&
@@ -216,7 +218,7 @@ class DomainTest extends TestCase
             ->domain()
             ->sendEpp('example', 'org');
 
-        $this->assertTrue($tokenSent->success());
+        $this->assertTrue($tokenSent->success(), $tokenSent->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'domain_epp' &&
@@ -237,7 +239,7 @@ class DomainTest extends TestCase
             ->domain()
             ->showEpp('example', 'org');
 
-        $this->assertTrue($tokenSent->success());
+        $this->assertTrue($tokenSent->success(), $tokenSent->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'domain_epp_show' &&
@@ -258,7 +260,7 @@ class DomainTest extends TestCase
             ->domain()
             ->get('example', 'org');
 
-        $this->assertTrue($domainInf->success());
+        $this->assertTrue($domainInf->success(), $domainInf->getMessage());
         $this->assertIsObject($domainInf);
         $this->assertInstanceOf(Domain::class, $domainInf->getData('domain'));
         $this->httpClient->assertSent(function (Request $request) {
@@ -281,7 +283,7 @@ class DomainTest extends TestCase
             ->domain()
             ->enableAutoRenewal('example', 'org');
 
-        $this->assertTrue($isSet->success());
+        $this->assertTrue($isSet->success(), $isSet->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'autorenew' &&
@@ -303,7 +305,7 @@ class DomainTest extends TestCase
             ->domain()
             ->disableAutoRenewal('example', 'org');
 
-        $this->assertTrue($isSet->success());
+        $this->assertTrue($isSet->success(), $isSet->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'autorenew' &&
@@ -325,7 +327,7 @@ class DomainTest extends TestCase
             ->domain()
             ->enableLock('example', 'org');
 
-        $this->assertTrue($isSet->success());
+        $this->assertTrue($isSet->success(), $isSet->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'lock' &&
@@ -347,7 +349,7 @@ class DomainTest extends TestCase
             ->domain()
             ->disableLock('example', 'org');
 
-        $this->assertTrue($isSet->success());
+        $this->assertTrue($isSet->success(), $isSet->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'lock' &&
@@ -374,7 +376,7 @@ class DomainTest extends TestCase
             ->domain()
             ->updateNameservers($domain);
 
-        $this->assertTrue($updated->success());
+        $this->assertTrue($updated->success(), $updated->getMessage());
         $this->httpClient->assertSent(function (Request $request) {
             return $request->method() === 'GET' &&
                 Arr::get($request->data(), 'command') === 'domain_ns_upd' &&
@@ -403,7 +405,7 @@ class DomainTest extends TestCase
             ->domain()
             ->list($request);
 
-        $this->assertTrue($domains->success());
+        $this->assertTrue($domains->success(), $domains->getMessage());
         $this->assertInstanceOf(Domain::class, $domains->getData('domains')[0]);
         $this->assertInstanceOf(Domain::class, $domains->getData('domains')[0]);
         $this->assertEquals('example1.org', $domains->getData('domains')[0]->domain);
