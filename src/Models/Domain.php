@@ -23,7 +23,7 @@ class Domain implements Model
         public ?string $sld = null,
         public ?string $tld = null,
         public ?int $period = 1,
-        public ?bool $autoRenew = false,
+        public ?bool $autoRenew = null,
         public ?DateTimeInterface $expireDate = null,
         public ?bool $lock = null,
         public ?bool $useTrustee = null,
